@@ -6,9 +6,9 @@ namespace :showoff do
     %x[mkdir -p presentations]
     Dir['showoff/*'].each do |dir|
       entry = dir.sub(/showoff\//, '')
-      %x[cd #{dir}; showoff static; mkdir static/file; cp *.css *.js static/file]
+      %x[cd #{dir}; showoff static; mkdir static/file; cp *.css *.js **/*.png static/file]
       %x[rm -rf presentations/#{entry}]
-      %x[mv #{dir}/static presentations/#{entry}]
+      %x[cp -R #{dir}/static presentations/#{entry}]
     end
   end
 
