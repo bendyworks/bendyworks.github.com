@@ -1,2 +1,15 @@
 /* custom style goes here */
 
+ul, li {
+  text-align: left !important;
+}
+
+li:before {
+  content: "\2022 \0020";
+}
+
+.smbullets li li {
+  margin-left: 1em;
+  font-size: 0.5em;
+}
+

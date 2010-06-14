@@ -5,5 +5,6 @@
 
 ### by: bradley grzesiak
 
-### aka: @listrophy
+### aka: [@listrophy][listrophy]
 
+[listrophy]: //twitter.com/listrophy
