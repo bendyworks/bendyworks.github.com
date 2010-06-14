@@ -1,0 +1,27 @@
+body {
+  text-align:center;
+}
+
+#content {
+  margin: 0 auto;
+  width: 960px;
+}
+
+ul {
+  list-style: none;
+  text-align: left;
+}
+
+#content > ul {
+  text-indent: 0;
+  width: 30em;
+  margin: 0 auto;
+}
+
+ul p {
+  display: inline;
+}
+
+ul ul {
+
+}

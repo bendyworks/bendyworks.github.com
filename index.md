@@ -3,7 +3,7 @@ layout: default
 title: Bendyworks Presentations
 ---
 
-Bendyworks Presentations
+Our Presentations
 ========================
 
 The following presentations have been given by Bendyworkers:
@@ -13,8 +13,16 @@ The following presentations have been given by Bendyworkers:
   * [Functional Techniques in Ruby][functional_techniques_in_ruby]
 
 * [Stephen Anderson][github_bendycode]
+
+  * _none posted yet_
+
 * [Nick Karpenske][github_randland]
+
+  * _none posted yet_
+
 * [Jaymes Waters][github_jaym3s]
+
+  * _none posted yet_
 
 [github_listrophy]: //github.com/listrophy
 [github_bendycode]: //github.com/bendycode
