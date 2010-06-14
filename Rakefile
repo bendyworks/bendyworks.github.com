@@ -12,7 +12,7 @@ namespace :showoff do
       # %x[sed -i '' -e 's/src="file:.*[^"]*\.\.\(.*\)$/src="..\1/g' presentations/**/*.html]
       Dir['presentations/**/*.html'].each do |filename|
         content = File.read(filename)
-        content = content.gsub(/src="file:[^\"]*\.\./, 'src="..')
+        content = content.gsub(/src="file:[^\"]*\.\//, 'src="./')
         File.open(filename, 'w') do |f|
           f.print content
         end
