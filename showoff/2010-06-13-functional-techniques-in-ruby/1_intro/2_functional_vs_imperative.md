@@ -1,4 +1,5 @@
 !SLIDE
+
 # functional v. imperative
 
 <img src="../file/func.png" alt="Functional Diagram" style="float: left; margin-left: 10px"/>
