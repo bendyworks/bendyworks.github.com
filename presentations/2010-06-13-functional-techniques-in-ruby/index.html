@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title></title>
+
+  <link rel="stylesheet" href="./css/reset.css" type="text/css"/>
+  <link rel="stylesheet" href="./css/showoff.css" type="text/css"/>
+
+  <script type="text/javascript" src="./js/jquery-1.4.min.js"></script>
+  <script type="text/javascript" src="./js/jquery.cycle.all.js"></script>
+	<script type="text/javascript" src="./js/jquery-print.js"></script>
+  <script type="text/javascript" src="./js/jquery.batchImageLoad.js"></script>
+
+  <script type="text/javascript" src="./js/jquery.doubletap-0.1.js"></script>
+
+  <script type="text/javascript" src="./js/fg.menu.js"></script>
+  <script type="text/javascript" src="./js/showoff.js"></script>
+  <script type="text/javascript" src="./js/jTypeWriter.js"> </script>
+  <script type="text/javascript" src="./js/sh_main.min.js"></script>
+  <script type="text/javascript" src="./js/core.js"></script>
+  <script type="text/javascript" src="./js/showoffcore.js"></script>
+
+  <link type="text/css" href="./css/fg.menu.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href="./css/theme/ui.all.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href="./css/sh_style.css" rel="stylesheet" >
+
+  
+
+  
+
+  <script type="text/javascript">
+  $(function(){
+    setupPreso(false, '.');
+  });
+  </script>
+</head>
+
+<body>
+
+
+<a tabindex="0" href="#search-engines" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="navmenu"><span class="ui-icon ui-icon-triangle-1-s"></span>slides</a>
+<div id="navigation" class="hidden"></div>
+
+<div id="help">
+  <table>
+    <tr><td class="key">space, &rarr;</td><td>next slide</td></tr>
+    <tr><td class="key">&larr;</td><td>previous slide</td></tr>
+    <tr><td class="key">d</td><td>debug mode</td></tr>
+    <tr><td class="key">## &lt;ret&gt;</td><td>go to slide #</td></tr>
+    <tr><td class="key">c</td><td>table of contents (vi)</td></tr>
+    <tr><td class="key">f</td><td>toggle footer</td></tr>
+    <tr><td class="key">r</td><td>reload slides</td></tr>
+    <tr><td class="key">z</td><td>toggle help (this)</td></tr>
+  </table>
+</div>
+
+<div id="preso">loading presentation...</div>
+<div id="footer">
+  <span id="slideInfo"></span>
+  <span id="debugInfo"></span>
+</div>
+
+<div id="slides" class="offscreen" style="display:none;">
+<div class="slide" data-transition="none"><div class="content" ref="1_intro/1_title">
+<h1>functional techniques in ruby</h1>
+
+<h2>a pecha-kucha-like talk</h2>
+
+<h3>by: bradley grzesiak</h3>
+
+<h3>aka: @listrophy</h3></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="1_intro/2_functional_vs_imperative">
+<h1>functional v. imperative</h1>
+
+<p>// some pics</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="1_intro/3_a_digression">
+<h1>a digression into the past</h1>
+
+<pre><code>10 REPEAT "after me"
+20 DO !use("gotos")
+30 GOTO 20
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="2_states/1_just_as_bad">
+<h1>what's just as bad?</h1>
+
+<pre class="sh_ruby"><code>'foobar'.gsub! /oo/, 'u'
+
+%x[date 0314]
+
+product.save</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content bullets" ref="2_states/2_state_vs_result">
+<h1>state vs. result</h1>
+
+<ul>
+<li>imperative :: change state of environment</li>
+<li>functional :: take input(s) to produce output(s)</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content" ref="2_states/3_ick">
+<h1>ick</h1>
+
+<pre class="sh_ruby"><code>def grade(score)
+  the_grade = nil
+  if score &gt; 90 then the_grade = 'A'
+  elsif score &gt; 80 then the_grade = 'B'
+  else the_grade = 'U'
+  the_grade
+end</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="2_states/4_moar_betta">
+<h1>moar betta</h1>
+
+<pre class="sh_ruby"><code>def grade(score)
+  score &gt; 90 ? 'A' :
+    (score &gt; 80 ? 'B' : 'U')
+end</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content bullets" ref="3_higher_order_functions/1_higher_order_functions">
+<h1>higher order functions</h1>
+
+<h2>or functions that can:</h2>
+
+<ul>
+<li>take functions as arguments</li>
+<li>return functions</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content" ref="3_higher_order_functions/2_complement">
+<h1>complement</h1>
+
+<div style="text-align: right; font-size: 200%">NB: f[*a] == f.call(*a)</div>
+
+
+<pre class="sh_ruby"><code>def complement f
+  lambda {|*a| not f[*a]}
+end
+
+is_even = lambda {|n| n % 2 == 0}
+is_odd = complement(is_even)
+is_odd[1] # true</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="3_higher_order_functions/3_conjoin">
+<h1>conjoin</h1>
+
+<pre class="sh_ruby"><code>def conjoin *e
+  base = lambda {|*a| true}
+  e.inject(base) do |c, pred|
+    lambda do |*a|
+      c[*a] &amp;&amp; pred[*a]
+    end
+  end
+end</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="3_higher_order_functions/4_conjoin_huh">
+<h1>huh?</h1>
+
+<h2>values : all? :: functions : conjoin</h2>
+
+<pre class="sh_ruby"><code>is_number = lambda {|n| n.kind_of?(Numeric)}
+is_even = lambda {|n| n % 2 == 0}
+div_by_three = lambda {|n| n % 3 == 0}
+
+even_number_div_by_three =
+  conjoin(is_number, is_even, div_by_three)</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="3_higher_order_functions/5_conjoin_why">
+<h1>ok... why?</h1>
+
+<pre class="sh_ruby"><code>def even_number_div_by_3 arg
+  [(arg.kind_of?(Numeric)),
+    (arg % 2 == 0), (arg % 3 == 0)].
+      inject(true){|memo,res| memo &amp;&amp; res}
+end</code></pre>
+
+<h2>What of:</h2>
+
+<pre class="sh_ruby"><code>even_number_div_by_3(Object.new)
+# 'undefined method `%' for #&lt;Object:...&gt;</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smbullets" ref="3_higher_order_functions/6_library">
+<h1>a library you might write</h1>
+
+<ul>
+<li>complement</li>
+<li>compose</li>
+<li>conjoin</li>
+<li>disjoin</li>
+<li>filter</li>
+<li>map</li>
+<li>reduce</li>
+<li>and a big one...</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content smbullets" ref="3_higher_order_functions/7_map_reduce">
+<h1>map-reduce</h1>
+
+<ul>
+<li><p>map:</p></li>
+<li><p>[a, e, g] becomes:</p></li>
+<li><p>{a =&gt; [b,c,d], e =&gt; [b,d,f], g =&gt; [b]}</p></li>
+<li><p>reduce:</p></li>
+<li><p>collapse the inverse:</p></li>
+<li><p>{b =&gt; 3, d =&gt; 2, c =&gt; 1, f =&gt; 1}</p></li>
+<li><p>Add some smarts &amp; you get "Google PageRank"</p></li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content bullets" ref="4_conclusion/1_scale">
+<h1>functional scales</h1>
+
+<ul>
+<li>given input(s), you get output(s)</li>
+<li>everything is self-contained</li>
+<li>parallel processing FTfW</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content bullets" ref="4_conclusion/2_bad_news">
+<h1>the bad news</h1>
+
+<ul>
+<li>tail recursion optimization is nice, but not in most ruby 1.8 implementations</li>
+<li>more abstraction &#x2248;&gt; more confusion</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content bullets" ref="4_conclusion/3_more">
+<h1>more!</h1>
+
+<ul>
+<li>currying: built into 1.9</li>
+<li>lazy evaluation/memoization: "let" in RSpec</li>
+<li>infinite streams: see sequences in FactoryGirl</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content" ref="4_conclusion/4_blown">
+<h1>phew!</h1>
+
+<h2>is your mind blown?</h2></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="4_conclusion/5_neat">
+<h1>also, this is neat</h1>
+
+<pre><code>!!! 5
+%html
+  %head
+    %script(src='jquery.js')
+    :javascript
+      $(function(){ $('h1').click(function(){$.post('/');})});
+    :css
+      h1 { height: 100em }
+  %body
+    %h1 play
+
+%w(rubygems sinatra haml).map{x|require x}
+get('/'){haml :index}
+post('/'){`osascript -e 'tell app "Keynote" to start slideshow'`}
+</code></pre></div>
+</div>
+</div>
+
+</body>
+</html>

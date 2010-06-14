@@ -1,0 +1,9 @@
+auto: true
+permalink: pretty
+pygments: true
+exclude:
+  - Gemfile
+  - Rakefile
+  - tmp
+  - showoff.sh
+  - showoff
