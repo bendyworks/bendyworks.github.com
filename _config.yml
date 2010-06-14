@@ -8,3 +8,4 @@ exclude:
   - showoff.sh
   - showoff
   - watch.rb
+  - README
