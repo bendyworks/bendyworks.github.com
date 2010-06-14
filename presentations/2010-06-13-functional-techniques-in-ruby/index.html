@@ -28,6 +28,8 @@
   <link type="text/css" href="./css/sh_style.css" rel="stylesheet" >
 
   
+    <link rel="stylesheet" href="file/style.css" type="text/css"/>
+  
 
   
 
@@ -245,7 +247,7 @@ end</code></pre>
   %body
     %h1 play
 
-%w(rubygems sinatra haml).map{x|require x}
+%w(rubygems sinatra haml).map{|x|require x}
 get('/'){haml :index}
 post('/'){`osascript -e 'tell app "Keynote" to start slideshow'`}
 </code></pre></div>
