@@ -1,0 +1,14 @@
+{
+  "name": "How Git and GitHub Change the Open Source Scene",
+  "sections": [
+    {"section":"title"},
+    {"section":"about_me"},
+    {"section":"preamble"},
+    {"section":"open_source_software"},
+    {"section":"sourceforge"},
+    {"section":"subversion"},
+    {"section":"git"},
+    {"section":"github"},
+    {"section":"conclusion"}
+  ]
+}

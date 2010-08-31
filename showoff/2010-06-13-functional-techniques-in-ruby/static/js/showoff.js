@@ -77,7 +77,6 @@ function initializePresentation(prefix) {
   setupMenu()
   if (slidesLoaded) {
     showSlide()
-    alert('slides loaded')
   } else {
     showFirstSlide();
     slidesLoaded = true
@@ -208,6 +207,8 @@ function showSlide(back_step) {
     bind('swiperight', swipeRight)
   removeResults()
 
+  $(currentSlide).find(".content").trigger("showoff:show");
+
   return getCurrentNotes()
 }
 
@@ -245,12 +246,25 @@ function determineIncremental()
 
 function prevStep()
 {
+
+  var event = jQuery.Event("showoff:prev");
+  $(currentSlide).find(".content").trigger(event);
+  if (event.isDefaultPrevented()) {
+      return;
+  }
+
   slidenum--
   return showSlide(true) // We show the slide fully loaded
 }
 
 function nextStep()
 {
+  var event = jQuery.Event("showoff:next");
+  $(currentSlide).find(".content").trigger(event);
+  if (event.isDefaultPrevented()) {
+      return;
+  }
+
   if (incrCurr >= incrSteps) {
     slidenum++
     return showSlide()
@@ -263,11 +277,6 @@ function nextStep()
     }
     incrCurr++
   }
-}
-
-function prevStep() {
-  slidenum--
-  return showSlide(true) // We show the slide fully loaded
 }
 
 function doDebugStuff()
@@ -284,7 +293,8 @@ function debug(data)
 {
   $('#debugInfo').text(data)
 }
-//  See e.g. http://www.quirksmode.org/js/events/keys.html for keycodes
+
+//  See e.g. http://www.quirksmode.org/js/keys.html for keycodes
 function keyDown(event)
 {
     var key = event.keyCode;
@@ -328,11 +338,11 @@ function keyDown(event)
       debugMode = !debugMode
       doDebugStuff()
     }
-    else if (key == 37 || key == 33) // Left arrow or page up
+    else if (key == 37 || key == 33 || key == 38) // Left arrow, page up, or up arrow
     {
       prevStep()
     }
-    else if (key == 39 || key == 34) // Right arrow or page down
+    else if (key == 39 || key == 34 || key == 40) // Right arrow, page down, or down arrow
     {
       nextStep()
     }
@@ -358,6 +368,10 @@ function keyDown(event)
 	else if (key == 27) // esc
 	{
 		removeResults();
+	}
+	else if (key == 80) // 'p' for preshow
+	{
+		runPreShow();
 	}
     return true
 }
@@ -450,3 +464,117 @@ function executeCode () {
     if (result != null) print(result);
 }
 $('.sh_javaScript code').live("click", executeCode);
+
+
+/********************
+ PreShow Code
+ ********************/
+
+var preshow_seconds = 0;
+var preshow_secondsLeft = 0;
+var preshow_secondsPer = 8;
+var preshow_running = false;
+var preshow_timerRunning = false;
+var preshow_current = 0;
+var preshow_images;
+var preshow_imagesTotal = 0;
+var preshow_des;
+
+function runPreShow() {
+	if(preshow_running) { 
+		stopPreShow() 
+	} else {
+		var minutes = prompt("Minutes from now to start")
+		preshow_secondsLeft = parseFloat(minutes) * 60
+		toggleFooter()
+		$.getJSON("preshow_files", false, function(data) {
+			$('#preso').after("<div id='preshow'></div><div id='tips'></div><div id='preshow_timer'></div>")
+			$.each(data, function(i, n) {
+				if(n == "preshow.json") {
+					// has a descriptions file
+					$.getJSON("/file/_preshow/preshow.json", false, function(data) {
+						preshow_des = data
+					})
+				} else {
+					$('#preshow').append('<img ref="' + n + '" src="/file/_preshow/' + n + '"/>')				
+				}
+			})
+			startPreShow()
+		})
+	}
+}
+
+function startPreShow() {
+  if (!preshow_running) {
+    preshow_running = true
+    preshow_seconds = 0
+    preshow_images = $('#preshow > img')
+    preshow_imagesTotal = preshow_images.size()
+    nextPreShowImage()
+
+    if(!preshow_timerRunning) {
+      setInterval(function() {
+        preshow_timerRunning = true
+        if (!preshow_running) { return }
+        preshow_seconds++
+        preshow_secondsLeft--
+		if (preshow_secondsLeft < 0) {
+			stopPreShow()
+		}
+        if (preshow_seconds == preshow_secondsPer) {
+          preshow_seconds = 0
+          nextPreShowImage()
+        }
+		addPreShowTips()
+      }, 1000)
+    }
+  }
+}
+
+function addPreShowTips() {
+	time = secondsToTime(preshow_secondsLeft)
+	$('#preshow_timer').text(time + ' to go-time')
+	var des = preshow_des[tmpImg.attr("ref")]
+	if(des) {
+		$('#tips').show()
+		$('#tips').text(des)
+	} else {
+		$('#tips').hide()
+	}
+}
+
+function secondsToTime(sec) {
+	min = Math.floor(sec / 60)
+	sec = sec - (min * 60)
+	if(sec < 10) {
+		sec = "0" + sec
+	}
+	return min + ":" + sec
+}
+
+function stopPreShow() {
+	preshow_running = false
+	
+	$('#preshow').remove()
+	$('#tips').remove()
+	$('#preshow_timer').remove()
+	
+	toggleFooter()
+	loadSlides(loadSlidesBool, loadSlidesPrefix);
+}
+
+function nextPreShowImage() {
+	preshow_current += 1
+	if((preshow_current + 1) > preshow_imagesTotal) {
+		preshow_current = 0
+	}
+
+	$("#preso").empty()
+	tmpImg = preshow_images.eq(preshow_current).clone()
+	$(tmpImg).attr('width', '1020')
+	$("#preso").html(tmpImg)
+}
+
+/********************
+ End PreShow Code
+ ********************/
