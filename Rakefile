@@ -5,7 +5,12 @@ namespace :showoff do
     %x[mkdir -p presentations]
     Dir['showoff/*'].each do |dir|
       entry = dir.sub(/showoff\//, '')
-      %x[cd #{dir}; showoff static; mkdir static/file; cp *.css *.js **/*.png static/file]
+      %x[cd #{dir}; showoff static; mkdir -p static/file]
+      ['*.css', '*.js', '**/*.png'].each do |file_type|
+        Dir["#{dir}/#{file_type}"].each do |file|
+          %x[cd #{dir}; cp ../../#{file} static/file]
+        end
+      end
       %x[rm -rf presentations/#{entry}]
       %x[cp -R #{dir}/static presentations/#{entry}]
       Dir['presentations/**/*.html'].each do |filename|
