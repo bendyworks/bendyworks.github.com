@@ -10,11 +10,13 @@ The following presentations have been given by Bendyworkers:
 
 * [Bradley Grzesiak][github_listrophy]
 
-  * [Functional Techniques in Ruby][functional_techniques_in_ruby]
-  * [How Git and GitHub Change the Open Source Scene][git_and_github]
+  * [How Git and GitHub Change the Open Source Scene][git_and_github] (August 28, 2010)
+  * [Regarding the Excavation of Lunar Regolith][lunar_mining] (August 6, 2010)
+  * [Functional Techniques in Ruby][functional_techniques_in_ruby] (June 13, 2010)
 
-[functional_techniques_in_ruby]: /presentations/2010-06-13-functional-techniques-in-ruby
 [git_and_github]: /presentations/2010-08-28-how-git-and-github-change-the-open-source-scene
+[lunar_mining]: /presentations/2010-08-06-lunar-mining
+[functional_techniques_in_ruby]: /presentations/2010-06-13-functional-techniques-in-ruby
 
 * [Stephen Anderson][github_bendycode]
 
