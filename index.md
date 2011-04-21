@@ -27,6 +27,10 @@ The following presentations have been given by Bendyworkers:
 
   * _none posted yet_
 
+* [Jim Remsik][github_jim]
+
+  * See [Jim's github page][github_jimpage]
+
 * [Nick Karpenske][github_randland]
 
   * _none posted yet_
@@ -35,7 +39,14 @@ The following presentations have been given by Bendyworkers:
 
   * _none posted yet_
 
+* [Devin Walters][github_devn]
+
+  * _none posted yet_
+
 [github_listrophy]: //github.com/listrophy
 [github_bendycode]: //github.com/bendycode
+[github_jim]: //github.com/bigtiger
+[github_jimpage]: //bigtiger.github.com
 [github_randland]: //github.com/randland
 [github_jaym3s]: //github.com/jaym3s
+[github_devn]: //github.com/devn
